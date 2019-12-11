@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: javacon-app
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: javacon-app
+        spec:
+            containers:
+            - name: javacon-app
+              image: acrkeda.azurecr.io/javacon-app:2.0

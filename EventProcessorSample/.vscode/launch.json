@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - EventProcessorSample",
+            "request": "launch",
+            "mainClass": "com.microsoft.azure.eventhubs.samples.eventprocessorsample.EventProcessorSample",
+            "projectName": "eventprocessorsample"
+        }
+    ]
+}
