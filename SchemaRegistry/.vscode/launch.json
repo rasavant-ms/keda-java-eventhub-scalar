@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ProducerExample",
+            "request": "launch",
+            "mainClass": "io.confluent.examples.clients.basicavro.ProducerExample",
+            "projectName": "java-client-avro-examples"
+        }
+    ]
+}
