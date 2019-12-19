@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-consumer
+  labels:
+    app: java-consumer
+spec:
+  selector:
+    matchLabels:
+      app: java-consumer
+  template:
+    metadata:
+      labels:
+        app: java-consumer
+    spec:
+      containers:
+      - name: java-consumer
+        image: acrkeda.azurecr.io/javacon-app-fin
+        imagePullPolicy: Never
+        env:
+        - name: KEDA_STORAGE_CONNECTIONSTRING
+          valueFrom:
+            secretKeyRef:
+                name: consumer-secrets
+                key: STORAGE_CONNECTIONSTRING
+        - name: KEDA_EVENTHUB_CONNECTIONSTRING
+          valueFrom:
+            secretKeyRef:
+                name: consumer-secrets
+                key: EVENTHUB_CONNECTIONSTRING
+        - name: KEDA_BLOB_CONTAINER
+        valueFrom:
+          secretKeyRef:
+              name: consumer-secrets
+              key: BLOB_CONTAINER
+        - name: KEDA_CONSUMER_GROUP
+        valueFrom:
+          secretKeyRef:
+              name: consumer-secrets
+              key: CONSUMER_GROUP
+        - name: KEDA_EVENTHUB_NAMESPACE
+        valueFrom:
+          secretKeyRef:
+              name: consumer-secrets
+              key: EVENTHUB_NAMESPACE
+        - name: KEDA_EVENTHUB_NAME
+        valueFrom:
+          secretKeyRef:
+              name: consumer-secrets
+              key: EVENTHUB_NAME
+        - name: KEDA_EVENTHUB_SAS_KEY
+        valueFrom:
+          secretKeyRef:
+              name: consumer-secrets
+              key: EVENTHUB_SAS_KEY
+---
+apiVersion: keda.k8s.io/v1alpha1
+kind: ScaledObject
+metadata:
+    name: java-consumer-scalar
+    namespace: default
+    labels:
+        app: java-consumer
+        deploymentName: java-consumer
+spec:
+    scaleTargetRef:
+        deploymentName: java-consumer
+    triggers:
+      - type: azure-eventhub
+        metadata:
+            # Required
+            connection: KEDA_EVENTHUB_CONNECTIONSTRING
+            storageConnection: KEDA_STORAGE_CONNECTIONSTRING
+            # Optional
+            consumerGroup: KEDA_CONSUMER_GROUP # default: $Default
+            unprocessedEventThreshold: '64' # default 64 events.
+            blobContainer: KEDA_BLOB_CONTAINER

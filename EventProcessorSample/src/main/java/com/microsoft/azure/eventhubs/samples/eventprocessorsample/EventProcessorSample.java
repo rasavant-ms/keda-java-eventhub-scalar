@@ -27,13 +27,13 @@ public class EventProcessorSample
     	// indicates where the blobs used to implement leases and checkpoints will be placed within the Storage
     	// account. All instances of EventProcessorHost which will be consuming from the same Event Hub and consumer
     	// group must use the same Azure Storage account and container name.
-    	String consumerGroupName = "$Default";
-    	String namespaceName = "prep3-openshift-eh";
-    	String eventHubName = "java-eh";
+    	String consumerGroupName = System.getenv("KEDA_CONSUMER_GROUP");
+    	String namespaceName = System.getenv("KEDA_EVENTHUB_NAMESPACE");
+    	String eventHubName = System.getenv("KEDA_EVENTHUB_NAME");
     	String sasKeyName = "RootManageSharedAccessKey";
-    	String sasKey = "CcDjNUrpdFRKP/APnl0z6vjjeSgK8PrBr1Whl1VoFXk=";
-    	String storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=ephstoragekeda;AccountKey=5UCXQCMfOUvtb6aE3rXy5lhX+PsWOlrLTpHPfyL/lqBSK2PQJsL4G7Lc5otJPyaY1JKOTQW2POia6jMZl+LwLw==;EndpointSuffix=core.windows.net";
-    	String storageContainerName = "ehstore";
+    	String sasKey = System.getenv("KEDA_EVENTHUB_SAS_KEY");
+    	String storageConnectionString = System.getenv("KEDA_STORAGE_CONNECTIONSTRING");
+    	String storageContainerName = System.getenv("KEDA_BLOB_CONTAINER");
     	String hostNamePrefix = "eph";
     	
     	// To conveniently construct the Event Hub connection string from the raw information, use the ConnectionStringBuilder class.
@@ -88,7 +88,7 @@ public class EventProcessorSample
 			System.out.println("Press enter to stop.");
 			try 
 			{
-				System.in.read();
+				while(true);
 			}
 			catch (Exception e)
 			{
