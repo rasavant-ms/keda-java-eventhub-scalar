@@ -1,0 +1,50 @@
+kubectl get pods -n keda
+kubectl apply -f deploy-secret.yaml
+kubectl apply -f deploy-eventhub-processor.yaml
+kubectl get pods
+kubectl get deployment
+kubectl delete -f deploy-eventhub-processor.yaml
+kubectl get roles
+kubectl get roles -n keda
+kubectl get role
+kubectl get role -n keda
+kubectl get pods -n keda
+kubectl get services -n keda
+kubectl get apiservices -n keda
+kubectl delete apiservices v1alpha1.keda.k8s.io
+kubectl get apiservices -n keda
+az aks get-credentials --resource-group openshift-prep3 --name keda-test-dec
+az aks update -n keda-test-dec -g openshift-prep3 --attach-acr acrkeda
+kubectl apply -f deploy-secret.yaml
+kubectl apply -f deploy-eventhub-processor.yaml
+kubectl get pods
+kubectl delete -f deploy-eventhub-processor.yaml
+kubectl delete -f deploy-secret.yaml
+kubectl apply -f deploy-secret.yaml
+kubectl apply -f deploy-eventhub-processor.yaml
+kubectl get pods
+kubectl delete -f deploy-eventhub-processor.yaml
+kubectl delete -f deploy-secret.yaml
+kubectl apply -f deploy-secret.yaml
+kubectl apply -f deploy-eventhub-processor.yaml
+kubectl get pods 
+kubectl get deployment
+kubectl get services
+kubectl get pods 
+kubectl delete -f deploy-eventhub-processor.yaml
+kubectl apply -f deploy-eventhub-processor.yaml
+git statua
+git status
+git diff deploy-secret.yaml
+kubectl delete -f deploy-eventhub-processor.yaml
+kubectl delete -f deploy-secret.yaml
+git diff deploy-eventhub-processor.yaml
+kubectl apply -f deploy-secret.yaml
+kubectl apply -f deploy-eventhub-processor.yaml
+date
+time
+kubectl get pods
+kubectl view context
+kubectl config view
+kubectl get pods
+doskey /HISTORY > history.txt

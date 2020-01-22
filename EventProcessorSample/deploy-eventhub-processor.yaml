@@ -15,8 +15,7 @@ spec:
     spec:
       containers:
       - name: java-consumer
-        image: acrkeda.azurecr.io/javacon-app-fin
-        imagePullPolicy: Never
+        image: acrkeda.azurecr.io/java-con:dec23
         env:
         - name: KEDA_STORAGE_CONNECTIONSTRING
           valueFrom:
@@ -29,30 +28,30 @@ spec:
                 name: consumer-secrets
                 key: EVENTHUB_CONNECTIONSTRING
         - name: KEDA_BLOB_CONTAINER
-        valueFrom:
-          secretKeyRef:
-              name: consumer-secrets
-              key: BLOB_CONTAINER
+          valueFrom:
+            secretKeyRef:
+                name: consumer-secrets
+                key: BLOB_CONTAINER
         - name: KEDA_CONSUMER_GROUP
-        valueFrom:
-          secretKeyRef:
-              name: consumer-secrets
-              key: CONSUMER_GROUP
+          valueFrom:
+            secretKeyRef:
+                name: consumer-secrets
+                key: CONSUMER_GROUP
         - name: KEDA_EVENTHUB_NAMESPACE
-        valueFrom:
-          secretKeyRef:
-              name: consumer-secrets
-              key: EVENTHUB_NAMESPACE
+          valueFrom:
+            secretKeyRef:
+                name: consumer-secrets
+                key: EVENTHUB_NAMESPACE
         - name: KEDA_EVENTHUB_NAME
-        valueFrom:
-          secretKeyRef:
-              name: consumer-secrets
-              key: EVENTHUB_NAME
+          valueFrom:
+            secretKeyRef:
+                name: consumer-secrets
+                key: EVENTHUB_NAME
         - name: KEDA_EVENTHUB_SAS_KEY
-        valueFrom:
-          secretKeyRef:
-              name: consumer-secrets
-              key: EVENTHUB_SAS_KEY
+          valueFrom:
+            secretKeyRef:
+                name: consumer-secrets
+                key: EVENTHUB_SAS_KEY
 ---
 apiVersion: keda.k8s.io/v1alpha1
 kind: ScaledObject
@@ -72,6 +71,6 @@ spec:
             connection: KEDA_EVENTHUB_CONNECTIONSTRING
             storageConnection: KEDA_STORAGE_CONNECTIONSTRING
             # Optional
-            consumerGroup: KEDA_CONSUMER_GROUP # default: $Default
+            consumerGroup: 'kedaconsumer' # default: $Default
             unprocessedEventThreshold: '64' # default 64 events.
-            blobContainer: KEDA_BLOB_CONTAINER
+            blobContainer: 'ehstore'

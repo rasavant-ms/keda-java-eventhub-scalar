@@ -195,7 +195,11 @@ docker push myacr.azurecr.io/<image_tag>
 # Deploy secrets
 kubectl apply -f deploy-secret.yaml
 >secret/consumer-secrets created
+```
 
+Make sure that the image name and tag in the `deploy-eventhub-processor.yaml` file matches the docker image pushed to ACR in the previous section
+
+```bash
 # Deploy Java application as Deployment and ScaledObject details
 kubectl apply -f deploy-eventhub-processor.yaml
 >deployment.apps/java-consumer created
